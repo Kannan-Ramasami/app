@@ -9,10 +9,13 @@ import joblib
 import numpy as np
 from typing import Any, Optional, Sequence, Tuple, List, Union, overload, Literal
 
-try:
-    from backend.signs_data import validate_one_hand
-except ImportError:
-    from signs_data import validate_one_hand
+import sys
+
+_PARENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PARENT_DIR not in sys.path:
+    sys.path.insert(0, _PARENT_DIR)
+
+from backend.signs_data import validate_one_hand
 
 TopKList = List[Tuple[str, float]]
 PredictResult2 = Tuple[Optional[str], float]

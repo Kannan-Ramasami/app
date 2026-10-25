@@ -4,23 +4,19 @@ import cv2
 import numpy as np
 import time
 from collections import deque, Counter
+import sys
 
-try:
-    from backend.signs_data import (
-        SIGNS, ONE_HAND_LETTERS, TWO_HAND_LETTERS,
-        distance, angle, compute_normalized_features, validate_one_hand
-    )
-    from backend.classifier import SignClassifier
-    from backend.hand_detector import HandDetector
-    from backend.train_model import train_all, COLLECTED_SAMPLES_FILE
-except ImportError:
-    from signs_data import (
-        SIGNS, ONE_HAND_LETTERS, TWO_HAND_LETTERS,
-        distance, angle, compute_normalized_features, validate_one_hand
-    )
-    from classifier import SignClassifier
-    from hand_detector import HandDetector
-    from train_model import train_all, COLLECTED_SAMPLES_FILE
+_PARENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PARENT_DIR not in sys.path:
+    sys.path.insert(0, _PARENT_DIR)
+
+from backend.signs_data import (
+    SIGNS, ONE_HAND_LETTERS, TWO_HAND_LETTERS,
+    distance, angle, compute_normalized_features, validate_one_hand
+)
+from backend.classifier import SignClassifier
+from backend.hand_detector import HandDetector
+from backend.train_model import train_all, COLLECTED_SAMPLES_FILE
 
 
 def save_calibrated_batch(letter: str, batch_vecs: list[list[float]]) -> None:

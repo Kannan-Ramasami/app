@@ -11,10 +11,13 @@ from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, Votin
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, accuracy_score
 
-try:
-    from backend.signs_data import SIGNS, ONE_HAND_LETTERS, TWO_HAND_LETTERS
-except ImportError:
-    from signs_data import SIGNS, ONE_HAND_LETTERS, TWO_HAND_LETTERS
+import sys
+
+_PARENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PARENT_DIR not in sys.path:
+    sys.path.insert(0, _PARENT_DIR)
+
+from backend.signs_data import SIGNS, ONE_HAND_LETTERS, TWO_HAND_LETTERS
 
 MODELS_DIR = os.path.join(os.path.dirname(__file__), "models")
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")

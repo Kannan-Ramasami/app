@@ -1,4 +1,14 @@
 import tkinter as tk
+import os
+import sys
+
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+FRONTEND_DIR = os.path.dirname(CURRENT_DIR)
+if FRONTEND_DIR not in sys.path:
+    sys.path.insert(0, FRONTEND_DIR)
+
+from utils.ui_components import DarkPillButton
+
 
 class NotFoundPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -23,23 +33,18 @@ class NotFoundPage(tk.Frame):
         )
         info.pack(pady=20)
         
-        btn = tk.Button(
+        btn = DarkPillButton(
             self,
             text="← Back to Home",
             font=("Helvetica", 12, "bold"),
             fg="#E6E6E6",
-            bg="#1A1A1A",
-            activebackground="#2A2A2A",
-            activeforeground="#FFFFFF",
-            relief="flat",
-            bd=0,
-            highlightthickness=1,
-            highlightbackground="#242424",
-            cursor="hand2",
-            padx=24,
-            pady=10,
+            normal_bg="#1A1A1A",
+            normal_border="#242424",
+            hover_bg="#2A2A2A",
+            hover_border="#383838",
+            height=44,
+            width=160,
             command=lambda: controller.show_frame("HomePage")
         )
         btn.pack(pady=20)
-        btn.bind("<Enter>", lambda e: btn.configure(bg="#2A2A2A"))
-        btn.bind("<Leave>", lambda e: btn.configure(bg="#1A1A1A"))
+

@@ -11,14 +11,15 @@ import time
 import cv2
 import numpy as np
 
-try:
-    from backend.hand_detector import HandDetector
-    from backend.signs_data import compute_normalized_features, distance
-    from backend.train_model import train_all
-except ImportError:
-    from hand_detector import HandDetector
-    from signs_data import compute_normalized_features, distance
-    from train_model import train_all
+import sys
+
+_PARENT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if _PARENT_DIR not in sys.path:
+    sys.path.insert(0, _PARENT_DIR)
+
+from backend.hand_detector import HandDetector
+from backend.signs_data import compute_normalized_features, distance
+from backend.train_model import train_all
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 os.makedirs(DATA_DIR, exist_ok=True)
